@@ -48,7 +48,7 @@ object Telemetry {
     }
 
     init {
-        if (DemoConfiguration.telemetryVerbosity == Verbosity.HIGH) {
+        if (DemoConfiguration.PDH_TELEMETRY) {
             SmartDashboard.putData(PowerDistribution(20, PowerDistribution.ModuleType.kRev))
         }
 

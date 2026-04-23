@@ -4,9 +4,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import sert2521.offseason2026.constants.WristConstants
 
 object DemoConfiguration {
-    val verbosityChooser = SendableChooser<Telemetry.Verbosity>()
-
     const val ENABLE_NETWORK_TUNING = true
+    const val PDH_TELEMETRY = false
 
     // Meters Per Second
     var driveSpeed = 0.0

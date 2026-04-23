@@ -25,8 +25,16 @@ object Wrist : SubsystemBase() {
     private val currentDebouncer = Debouncer(0.2, Debouncer.DebounceType.kRising)
 
     private val doubleTelemetries = mapOf(
-        "* Wrist Angle" to { (leftMotor.encoder.position + rightMotor.encoder.position) / 2 },
-        "* Wrist Velocity" to { (leftMotor.encoder.velocity + rightMotor.encoder.velocity) / 2 }
+        "* Wrist/Angle" to { (leftMotor.encoder.position + rightMotor.encoder.position) / 2 },
+        "^ Wrist/Velocity" to { (leftMotor.encoder.velocity + rightMotor.encoder.velocity) / 2 },
+
+        "_ Wrist/Left Motor/Speed" to { leftMotor.encoder.velocity },
+        "_ Wrist/Left Motor/Voltage" to { leftMotor.appliedOutput * leftMotor.busVoltage },
+        "_ Wrist/Left Motor/Current" to { leftMotor.outputCurrent },
+
+        "_ Wrist/Right Motor/Speed" to { rightMotor.encoder.velocity },
+        "_ Wrist/Right Motor/Voltage" to { rightMotor.appliedOutput * rightMotor.busVoltage },
+        "_ Wrist/Right Motor/Current" to { rightMotor.outputCurrent }
     )
 
     private val booleanTelemetries = mapOf(
