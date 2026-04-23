@@ -67,13 +67,17 @@ object Flywheels : SubsystemBase() {
         }
     }
 
-    fun stop(): Command {
-        return runOnce {
+    private fun stop(): Command {
+        return run {
             topMotor.stopMotor()
             bottomMotor.stopMotor()
-        }.andThen(
-            Commands.idle()
-        )
+        }
+    }
+
+    fun intakeFlywheels(): Command {
+        return run {
+            setSetpoints(FlywheelConstants.INTAKE_FROM_FLYWHEELS_SPEED)
+        }
     }
 
     fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,

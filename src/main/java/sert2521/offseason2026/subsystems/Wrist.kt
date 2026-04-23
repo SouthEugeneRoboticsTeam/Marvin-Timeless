@@ -119,11 +119,9 @@ object Wrist : SubsystemBase() {
     }
 
     fun toPosition(position: Double): Command {
-        return runOnce {
+        return run {
             setSetpoint(position)
-        }.andThen(
-            Commands.waitUntil { isAtSetpoint() }
-        )
+        }
     }
 
     private fun toMovingPosition(position: DoubleSupplier): Command {

@@ -56,35 +56,35 @@ object Telemetry {
             driveSpeedSubscriber = DoubleTopic(
                 NetworkTableInstance.getDefault()
                     .getDoubleTopic("Config/Drive Speed")
-            ).subscribe(DemoConfiguration.driveSpeed)
+            ).getEntry(DemoConfiguration.driveSpeed)
             rotationSpeedSubscriber = DoubleTopic(
                 NetworkTableInstance.getDefault()
                     .getDoubleTopic("Config/Rotation Speed")
-            ).subscribe(DemoConfiguration.rotationSpeed)
+            ).getEntry(DemoConfiguration.rotationSpeed)
             flywheelSpeedSubscriber = DoubleTopic(
                 NetworkTableInstance.getDefault()
                     .getDoubleTopic("Config/Flywheel Speed")
-            ).subscribe(DemoConfiguration.flywheelSpeed)
+            ).getEntry(DemoConfiguration.flywheelSpeed)
             flywheelSpeedIsDefaultSubscriber = BooleanTopic(
                 NetworkTableInstance.getDefault()
                     .getBooleanTopic("Config/Flywheels Always Rev")
-            ).subscribe(DemoConfiguration.flywheelSpeedIsDefault)
+            ).getEntry(DemoConfiguration.flywheelSpeedIsDefault)
             wristMaxHeightSubscriber = DoubleTopic(
                 NetworkTableInstance.getDefault()
                     .getDoubleTopic("Config/Wrist Slider Max Height")
-            ).subscribe(DemoConfiguration.wristMaxHeight)
+            ).getEntry(DemoConfiguration.wristMaxHeight)
             enableWristSubscriber = BooleanTopic(
                 NetworkTableInstance.getDefault()
                     .getBooleanTopic("Config/Enable Wrist")
-            ).subscribe(DemoConfiguration.enableWrist)
+            ).getEntry(DemoConfiguration.enableWrist)
             enableWristToSliderSubscriber = BooleanTopic(
                 NetworkTableInstance.getDefault()
                     .getBooleanTopic("Config/Enable Wrist Slider Control")
-            ).subscribe(DemoConfiguration.enableWristToSlider)
+            ).getEntry(DemoConfiguration.enableWristToSlider)
             enableDriveSubscriber = BooleanTopic(
                 NetworkTableInstance.getDefault()
                     .getBooleanTopic("Config/Enable Driving")
-            ).subscribe(DemoConfiguration.enableDrive)
+            ).getEntry(DemoConfiguration.enableDrive)
 
             applyConfigCommand = Commands.runOnce({ applyConfig() })
             applyConfigCommand.name = "Apply Config"
