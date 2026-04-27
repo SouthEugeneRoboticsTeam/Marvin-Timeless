@@ -124,13 +124,13 @@ object Wrist : SubsystemBase() {
         )
     }
 
-    fun toPosition(position: Double): Command {
+    fun goToPosition(position: Double): Command {
         return run {
             setSetpoint(position)
         }
     }
 
-    private fun toMovingPosition(position: DoubleSupplier): Command {
+    private fun goToMovingPosition(position: DoubleSupplier): Command {
         return run {
             setSetpoint(position.asDouble)
         }
@@ -140,7 +140,7 @@ object Wrist : SubsystemBase() {
         return Commands.waitUntil {
             MathUtil.isNear(0.0, Input.getGunnerSlider(), 0.02)
         }.andThen(
-            toMovingPosition {
+            goToMovingPosition {
                 MathUtil.interpolate(
                     WristConstants.STOW_POSITION,
                     DemoConfiguration.wristMaxHeight,

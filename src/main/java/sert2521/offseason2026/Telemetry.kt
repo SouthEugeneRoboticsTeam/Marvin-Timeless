@@ -52,7 +52,7 @@ object Telemetry {
             SmartDashboard.putData(PowerDistribution(20, PowerDistribution.ModuleType.kRev))
         }
 
-        if (DemoConfiguration.ENABLE_NETWORK_TUNING) {
+        if (DemoConfiguration.ENABLE_NETWORK_CONFIG) {
             driveSpeedSubscriber = DoubleTopic(
                 NetworkTableInstance.getDefault()
                     .getDoubleTopic("Config/Drive Speed")

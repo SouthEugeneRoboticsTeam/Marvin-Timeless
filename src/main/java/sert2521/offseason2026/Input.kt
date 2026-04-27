@@ -1,12 +1,13 @@
 package sert2521.offseason2026
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
+import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj2.command.Commands.runOnce
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID
-import edu.wpi.first.wpilibj2.command.button.CommandJoystick
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
+import sert2521.offseason2026.constants.WristConstants
 import sert2521.offseason2026.subsystems.Flywheels
 import sert2521.offseason2026.subsystems.IntakeIndexer
+import sert2521.offseason2026.subsystems.Wrist
 import sert2521.offseason2026.subsystems.drivetrain.Drivetrain
 
 object Input {
@@ -23,15 +24,18 @@ object Input {
     private val resetRotOffset = driverController.start().and(driverController.back())
 
     /* GUNNER */
-    private val gunnerIntake = gunnerController.button(0)
+    private val gunnerIntake = gunnerController.button(1)
 
-    private val wristStow = gunnerController.button(0) // TODO: Set
+    // TODO: Set button numbers
+    private val wristStow = gunnerController.button(0)
     private val wristPodium = gunnerController.button(0)
     private val wristAmp = gunnerController.button(0)
 
     private val gunnerFlywheelIntake = gunnerController.button(0)
 
     init {
+        DriverStation.silenceJoystickConnectionWarning(true)
+
         intake.whileTrue(IntakeIndexer.intake())
         flywheelIntake.whileTrue(Flywheels.intakeFlywheels().withDeadline(IntakeIndexer.recenter()))
         reverse.whileTrue(IntakeIndexer.reverse())
@@ -39,9 +43,15 @@ object Input {
         shoot.onTrue(IntakeIndexer.kick())
         rev.whileTrue(Flywheels.rev())
 
-
-
         resetRotOffset.onTrue(runOnce(Drivetrain::setRotationOffset))
+
+        gunnerIntake.whileTrue(IntakeIndexer.intake())
+
+        wristStow.onTrue(Wrist.goToPosition(WristConstants.STOW_POSITION))
+        wristPodium.onTrue(Wrist.goToPosition(WristConstants.PODIUM_POSITION))
+        wristAmp.onTrue(Wrist.goToPosition(WristConstants.AMP_POSITION))
+
+        gunnerFlywheelIntake.whileTrue(Flywheels.intakeFlywheels().withDeadline(IntakeIndexer.recenter()))
     }
 
     fun getLeftX(): Double {
