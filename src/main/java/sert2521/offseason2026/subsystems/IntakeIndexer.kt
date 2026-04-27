@@ -83,9 +83,17 @@ object IntakeIndexer : SubsystemBase() {
                 IntakeIndexerConstants.INTAKING_ALIGNMENT_VOLTAGE,
                 IntakeIndexerConstants.INTAKING_INDEXER_VOLTAGE
             )
-        }.until {
-            !getBeambreakClear()
-        }
+        }.until { !getBeambreakClear() }
+    }
+
+    fun slowIntake(): Command {
+        return run {
+            setVoltages(
+                IntakeIndexerConstants.RECENTERING_ROLLER_VOLTAGE,
+                IntakeIndexerConstants.RECENTERING_ALIGNMENT_VOLTAGE,
+                IntakeIndexerConstants.RECENTERING_INDEXER_VOLTAGE
+            )
+        }.until { !getBeambreakClear() }
     }
 
     fun kick(): Command {
@@ -123,6 +131,7 @@ object IntakeIndexer : SubsystemBase() {
         }
     }
 
+    // Advanced telemetry stuff, you'll never have to edit this I'm pretty sure
     fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,
                         includes:String){
         doubleTelemetries.keys.forEach {

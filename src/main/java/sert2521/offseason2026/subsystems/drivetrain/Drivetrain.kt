@@ -73,18 +73,19 @@ object Drivetrain : SubsystemBase() {
         rotationOffset = currentRotation
     }
 
-    fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,
-                        includes: String) {
-        modules.forEach {
-            it.updateTelemetry(doubles, bools, includes)
-        }
-    }
-
     fun setDefaultCommand() {
         defaultCommand = if (DemoConfiguration.enableDrive) {
             joystickDrive(Input::getLeftX, Input::getLeftY, Input::getRightRot)
         } else {
             Commands.idle(this)
+        }
+    }
+
+    // Advanced telemetry stuff, you'll never have to edit this I'm pretty sure
+    fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,
+                        includes: String) {
+        modules.forEach {
+            it.updateTelemetry(doubles, bools, includes)
         }
     }
 }

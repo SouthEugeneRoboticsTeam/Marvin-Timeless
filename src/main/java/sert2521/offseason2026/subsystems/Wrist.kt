@@ -144,6 +144,15 @@ object Wrist : SubsystemBase() {
         )
     }
 
+    fun setDefaultCommand() {
+        defaultCommand = if (DemoConfiguration.enableWristToSlider && DemoConfiguration.enableWrist) {
+            wristToSlider()
+        } else {
+            Commands.idle(this)
+        }
+    }
+
+    // Advanced telemetry stuff, you'll never have to edit this I'm pretty sure
     fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,
                         includes:String){
         doubleTelemetries.keys.forEach {
@@ -162,14 +171,6 @@ object Wrist : SubsystemBase() {
                     bools[telemetryKey] = booleanTelemetries[it]!!.invoke()
                 }
             }
-        }
-    }
-
-    fun setDefaultCommand() {
-        defaultCommand = if (DemoConfiguration.enableWristToSlider && DemoConfiguration.enableWrist) {
-            wristToSlider()
-        } else {
-            Commands.idle(this)
         }
     }
 }

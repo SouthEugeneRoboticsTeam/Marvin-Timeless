@@ -7,9 +7,7 @@ import com.revrobotics.spark.SparkLowLevel
 import com.revrobotics.spark.SparkMax
 import com.revrobotics.spark.config.SparkBaseConfig
 import com.revrobotics.spark.config.SparkMaxConfig
-import edu.wpi.first.networktables.BooleanTopic
 import edu.wpi.first.wpilibj2.command.Command
-import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import sert2521.offseason2026.DemoConfiguration
 import sert2521.offseason2026.constants.ElectronicIDs
@@ -80,6 +78,15 @@ object Flywheels : SubsystemBase() {
         }
     }
 
+    fun setDefaultCommand() {
+        defaultCommand = if (DemoConfiguration.flywheelSpeedIsDefault) {
+            rev()
+        } else {
+            stop()
+        }
+    }
+
+    // Advanced telemetry stuff, you'll never have to edit this I'm pretty sure
     fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,
                         includes:String){
         doubleTelemetries.keys.forEach {
@@ -98,14 +105,6 @@ object Flywheels : SubsystemBase() {
                     bools[telemetryKey] = booleanTelemetries[it]!!.invoke()
                 }
             }
-        }
-    }
-
-    fun setDefaultCommand() {
-        defaultCommand = if (DemoConfiguration.flywheelSpeedIsDefault) {
-            rev()
-        } else {
-            stop()
         }
     }
 }
