@@ -39,7 +39,7 @@ object Telemetry {
 
     // "*" means necessary, even while directly in demo
     // "^" means priority, meaning useful data to know some of the time
-    // "_" means debug values, meaning only data useful for debug really
+    // "_" means debug values, meaning data only really useful for debugging
     private val includeLevels = when (DemoConfiguration.telemetryVerbosity) {
         Verbosity.HIGH -> "*^_"
         Verbosity.MEDIUM -> "*^"

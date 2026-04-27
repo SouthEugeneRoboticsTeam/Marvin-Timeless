@@ -5,6 +5,7 @@ import edu.wpi.first.math.geometry.Translation2d
 object SwerveConstants {
     val moduleNames = arrayOf("FL", "FR", "BL", "BR")
 
+    // TODO: Calibrate drive
     val zeroRotations = arrayOf(
         0.0, // FL
         0.0, // FR
@@ -13,20 +14,22 @@ object SwerveConstants {
     )
 
     val moduleTranslations = arrayOf(
-        Translation2d.kZero,
-        Translation2d.kZero,
-        Translation2d.kZero,
-        Translation2d.kZero
+        Translation2d(0.263525, 0.263525),
+        Translation2d(-0.263525, 0.263525),
+        Translation2d(0.263525, -0.263525),
+        Translation2d(-0.263525, -0.263525)
     )
 
     const val DRIVE_CURRENT_LIMIT = 40
 
+    // TODO: Tune gains
     const val ANGLE_P = 0.0
     const val ANGLE_D = 0.0
 
     const val DRIVE_S = 0.0
     const val DRIVE_V = 0.0
 
+    // TODO: Test if needed
     // Max drive speed in m/s
     const val MAX_SPEED = 0.0
 

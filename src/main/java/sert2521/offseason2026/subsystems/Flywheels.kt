@@ -19,8 +19,10 @@ object Flywheels : SubsystemBase() {
 
     private val doubleTelemetries = mapOf(
         "* Flywheels/Average speed" to { (topMotor.encoder.velocity + bottomMotor.encoder.velocity) / 2 },
+
         "_ Flywheels/Top/Speed" to { topMotor.encoder.velocity },
         "_ Flywheels/Top/Voltage" to { topMotor.appliedOutput * topMotor.busVoltage },
+
         "_ Flywheels/Bottom/Speed" to { bottomMotor.encoder.velocity },
         "_ Flywheels/Bottom/Voltage" to { bottomMotor.appliedOutput * bottomMotor.busVoltage }
     )
@@ -86,7 +88,6 @@ object Flywheels : SubsystemBase() {
         }
     }
 
-    // Advanced telemetry stuff, you'll never have to edit this I'm pretty sure
     fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,
                         includes:String){
         doubleTelemetries.keys.forEach {

@@ -62,6 +62,12 @@ object Wrist : SubsystemBase() {
             .maxAcceleration(WristConstants.MAX_ACCELERATION)
             .allowedProfileError(WristConstants.ALLOWED_PROFILE_ERROR)
 
+        // Can't have a reverse soft limit because it enables at any position
+        // and goes backward to rezero
+        leftConfig.softLimit
+            .forwardSoftLimitEnabled(true)
+            .forwardSoftLimit(WristConstants.HARD_MAX)
+
         val rightConfig = SparkMaxConfig().apply(leftConfig)
         rightConfig
             .inverted(true)
@@ -111,9 +117,9 @@ object Wrist : SubsystemBase() {
             currentDebouncer.calculate(leftMotor.outputCurrent > WristConstants.REZERO_CURRENT_THRESHOLD)
         }.andThen(
             runOnce {
+                leftMotor.encoder.position = WristConstants.HARD_MIN
+                rightMotor.encoder.position = WristConstants.HARD_MIN
                 setVoltage(0.0)
-                leftMotor.encoder.position = WristConstants.STOW_POSITION
-                rightMotor.encoder.position = WristConstants.STOW_POSITION
             }
         )
     }
@@ -152,7 +158,6 @@ object Wrist : SubsystemBase() {
         }
     }
 
-    // Advanced telemetry stuff, you'll never have to edit this I'm pretty sure
     fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,
                         includes:String){
         doubleTelemetries.keys.forEach {

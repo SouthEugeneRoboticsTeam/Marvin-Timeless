@@ -38,7 +38,8 @@ object Drivetrain : SubsystemBase() {
     }
 
     private fun driveRobotOriented(chassisSpeeds: ChassisSpeeds) {
-        val states = kinematics.toSwerveModuleStates(chassisSpeeds)
+        // Should be going fairly slow, so no desaturation needed probably
+        val states = kinematics.toSwerveModuleStates(ChassisSpeeds.discretize(chassisSpeeds, 0.02))
 
         modules.forEachIndexed { index, module ->
             module.setState(states[index])
@@ -81,7 +82,6 @@ object Drivetrain : SubsystemBase() {
         }
     }
 
-    // Advanced telemetry stuff, you'll never have to edit this I'm pretty sure
     fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,
                         includes: String) {
         modules.forEach {

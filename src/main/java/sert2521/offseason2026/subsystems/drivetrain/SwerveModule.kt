@@ -30,7 +30,13 @@ class SwerveModule(private val index: Int) {
     private val doubleTelemetries = mapOf(
         "^ Swerve/$name Module/Angle Position Radians" to { angleMotor.encoder.position },
         "^ Swerve/$name Module/Drive Speed MPS" to { driveMotor.encoder.velocity },
-        "^ Swerve/$name Module/CANcoder Position" to { canCoder.position.value.`in`(Radians) }
+        "^ Swerve/$name Module/CANcoder Position Radians" to { canCoder.position.value.`in`(Radians) },
+
+        "_ Swerve/$name Module/Drive Motor/Voltage" to { driveMotor.appliedOutput * driveMotor.busVoltage },
+        "_ Swerve/$name Module/Drive Motor/Current" to { driveMotor.outputCurrent },
+
+        "_ Swerve/$name Module/Angle Motor/Voltage" to { angleMotor.appliedOutput * angleMotor.busVoltage },
+        "_ Swerve/$name Module/Angle Motor/Current" to { angleMotor.outputCurrent }
     )
 
     private val booleanTelemetries = mapOf(
@@ -98,7 +104,6 @@ class SwerveModule(private val index: Int) {
                 Units.rotationsToRadians(SwerveConstants.zeroRotations[index])
     }
 
-    // Advanced telemetry stuff, you'll never have to edit this I'm pretty sure
     fun updateTelemetry(doubles: MutableMap<String, Double>, bools: MutableMap<String, Boolean>,
                         includes:String){
         doubleTelemetries.keys.forEach {

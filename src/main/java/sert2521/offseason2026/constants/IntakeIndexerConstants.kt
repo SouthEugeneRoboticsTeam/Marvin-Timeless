@@ -1,6 +1,7 @@
 package sert2521.offseason2026.constants
 
 object IntakeIndexerConstants {
+    // TODO: Tune all
     // Intaking
     const val INTAKING_ROLLER_VOLTAGE = 0.0
     const val INTAKING_ALIGNMENT_VOLTAGE = 0.0
