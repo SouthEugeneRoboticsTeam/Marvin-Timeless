@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.util.WPILibVersion
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
 import sert2521.offseason2026.subsystems.Wrist
+import sert2521.offseason2026.subsystems.drivetrain.Drivetrain
 
 /**
  * The VM is configured to automatically run this object (which basically functions as a singleton class),
@@ -21,8 +22,9 @@ import sert2521.offseason2026.subsystems.Wrist
  */
 object Robot : TimedRobot() {
     override fun robotInit() {
+        Input
+        Drivetrain
     }
-
 
     override fun robotPeriodic() {
         CommandScheduler.getInstance().run()
@@ -34,25 +36,5 @@ object Robot : TimedRobot() {
         CommandScheduler.getInstance().schedule(Wrist.rezero())
     }
 
-    /** This method is called periodically during operator control.  */
-    override fun teleopPeriodic() {
-
-    }
-
-    override fun testInit() {
-        // Cancels all running commands at the start of test mode.
-        CommandScheduler.getInstance().cancelAll()
-    }
-
-    override fun testPeriodic() {
-
-    }
-
-    override fun simulationInit() {
-
-    }
-
-    override fun simulationPeriodic() {
-
-    }
+    override fun teleopPeriodic() {}
 }
