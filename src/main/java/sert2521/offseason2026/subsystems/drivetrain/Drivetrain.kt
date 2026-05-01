@@ -59,9 +59,9 @@ object Drivetrain : SubsystemBase() {
 
             driveFieldOriented(
                 ChassisSpeeds(
-                    sin(theta) * mag * DemoConfiguration.driveSpeed,
-                    cos(theta) * mag * DemoConfiguration.driveSpeed,
-                    omega.asDouble * DemoConfiguration.rotationSpeed
+                    sin(theta) * mag * DemoConfiguration.DRIVE_SPEED,
+                    cos(theta) * mag * DemoConfiguration.DRIVE_SPEED,
+                    omega.asDouble * DemoConfiguration.ROTATION_SPEED
                 )
             )
         }
@@ -72,7 +72,7 @@ object Drivetrain : SubsystemBase() {
     }
 
     fun setDefaultCommand() {
-        defaultCommand = if (DemoConfiguration.enableDrive) {
+        defaultCommand = if (DemoConfiguration.ENABLE_DRIVE) {
             joystickDrive(Input::getLeftX, Input::getLeftY, Input::getRightRot)
         } else {
             Commands.idle(this)

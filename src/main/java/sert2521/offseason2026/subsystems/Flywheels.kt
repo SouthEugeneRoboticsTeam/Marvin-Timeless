@@ -63,7 +63,7 @@ object Flywheels : SubsystemBase() {
 
     fun rev(): Command {
         return run {
-            setSetpoints(DemoConfiguration.flywheelSpeed)
+            setSetpoints(DemoConfiguration.FLYWHEEL_SPEED)
         }
     }
 
@@ -81,7 +81,7 @@ object Flywheels : SubsystemBase() {
     }
 
     fun setDefaultCommand() {
-        defaultCommand = if (DemoConfiguration.flywheelSpeedIsDefault) {
+        defaultCommand = if (DemoConfiguration.FLYWHEEL_SPEED_IS_DEFAULT) {
             rev()
         } else {
             stop()

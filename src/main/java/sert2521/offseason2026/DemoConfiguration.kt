@@ -8,21 +8,21 @@ object DemoConfiguration {
 
     // This is basically how much telemetry there is
     // Modes are: HIGH, MEDIUM, LOW, NONE
-    var telemetryVerbosity = Telemetry.Verbosity.NONE
+    var TELEMETRY_VERBOSITY = Telemetry.Verbosity.NONE
 
     // Meters Per Second
-    var driveSpeed = 0.0
+    var DRIVE_SPEED = 0.0
     // Radians Per Second
-    var rotationSpeed = 0.0
+    var ROTATION_SPEED = 0.0
 
     // RPM
-    var flywheelSpeed = 0.0
-    var flywheelSpeedIsDefault = true
+    var FLYWHEEL_SPEED = 0.0
+    var FLYWHEEL_SPEED_IS_DEFAULT = true
 
     // Rotations
-    var wristMaxHeight = WristConstants.AMP_POSITION
-    var enableWrist = true
-    var enableWristToSlider = true
+    var WRIST_MAX_HEIGHT = WristConstants.AMP_POSITION
+    var ENABLE_WRIST = true
+    var ENABLE_WRIST_TO_SLIDER = true
 
-    var enableDrive = true
+    var ENABLE_DRIVE = true
 }

@@ -40,7 +40,7 @@ object Telemetry {
     // "*" means necessary, even while directly in demo
     // "^" means priority, meaning useful data to know some of the time
     // "_" means debug values, meaning data only really useful for debugging
-    private val includeLevels = when (DemoConfiguration.telemetryVerbosity) {
+    private val includeLevels = when (DemoConfiguration.TELEMETRY_VERBOSITY) {
         Verbosity.HIGH -> "*^_"
         Verbosity.MEDIUM -> "*^"
         Verbosity.LOW -> "*"
@@ -56,37 +56,37 @@ object Telemetry {
             driveSpeedSubscriber = DoubleTopic(
                 NetworkTableInstance.getDefault()
                     .getDoubleTopic("Config/Drive Speed")
-            ).getEntry(DemoConfiguration.driveSpeed)
+            ).getEntry(DemoConfiguration.DRIVE_SPEED)
             rotationSpeedSubscriber = DoubleTopic(
                 NetworkTableInstance.getDefault()
                     .getDoubleTopic("Config/Rotation Speed")
-            ).getEntry(DemoConfiguration.rotationSpeed)
+            ).getEntry(DemoConfiguration.ROTATION_SPEED)
             flywheelSpeedSubscriber = DoubleTopic(
                 NetworkTableInstance.getDefault()
                     .getDoubleTopic("Config/Flywheel Speed")
-            ).getEntry(DemoConfiguration.flywheelSpeed)
+            ).getEntry(DemoConfiguration.FLYWHEEL_SPEED)
             flywheelSpeedIsDefaultSubscriber = BooleanTopic(
                 NetworkTableInstance.getDefault()
                     .getBooleanTopic("Config/Flywheels Always Rev")
-            ).getEntry(DemoConfiguration.flywheelSpeedIsDefault)
+            ).getEntry(DemoConfiguration.FLYWHEEL_SPEED_IS_DEFAULT)
             wristMaxHeightSubscriber = DoubleTopic(
                 NetworkTableInstance.getDefault()
                     .getDoubleTopic("Config/Wrist Slider Max Height")
-            ).getEntry(DemoConfiguration.wristMaxHeight)
+            ).getEntry(DemoConfiguration.WRIST_MAX_HEIGHT)
             enableWristSubscriber = BooleanTopic(
                 NetworkTableInstance.getDefault()
                     .getBooleanTopic("Config/Enable Wrist")
-            ).getEntry(DemoConfiguration.enableWrist)
+            ).getEntry(DemoConfiguration.ENABLE_WRIST)
             enableWristToSliderSubscriber = BooleanTopic(
                 NetworkTableInstance.getDefault()
                     .getBooleanTopic("Config/Enable Wrist Slider Control")
-            ).getEntry(DemoConfiguration.enableWristToSlider)
+            ).getEntry(DemoConfiguration.ENABLE_WRIST_TO_SLIDER)
             enableDriveSubscriber = BooleanTopic(
                 NetworkTableInstance.getDefault()
                     .getBooleanTopic("Config/Enable Driving")
-            ).getEntry(DemoConfiguration.enableDrive)
+            ).getEntry(DemoConfiguration.ENABLE_DRIVE)
 
-            applyConfigCommand = Commands.runOnce({ applyConfig() })
+            applyConfigCommand = Commands.runOnce({ applyConfig() }).ignoringDisable(true)
             applyConfigCommand.name = "Apply Config"
 
             telemetryVerbosityChooser = SendableChooser<Verbosity>()
@@ -128,15 +128,15 @@ object Telemetry {
     }
 
     private fun applyConfig() {
-        DemoConfiguration.driveSpeed = driveSpeedSubscriber!!.get()
-        DemoConfiguration.rotationSpeed = rotationSpeedSubscriber!!.get()
-        DemoConfiguration.flywheelSpeed = flywheelSpeedSubscriber!!.get()
-        DemoConfiguration.flywheelSpeedIsDefault = flywheelSpeedIsDefaultSubscriber!!.get()
-        DemoConfiguration.wristMaxHeight = wristMaxHeightSubscriber!!.get()
-        DemoConfiguration.enableWrist = enableWristSubscriber!!.get()
-        DemoConfiguration.enableWristToSlider = enableWristToSliderSubscriber!!.get()
-        DemoConfiguration.enableDrive = enableDriveSubscriber!!.get()
-        DemoConfiguration.telemetryVerbosity = telemetryVerbosityChooser!!.selected
+        DemoConfiguration.DRIVE_SPEED = driveSpeedSubscriber!!.get()
+        DemoConfiguration.ROTATION_SPEED = rotationSpeedSubscriber!!.get()
+        DemoConfiguration.FLYWHEEL_SPEED = flywheelSpeedSubscriber!!.get()
+        DemoConfiguration.FLYWHEEL_SPEED_IS_DEFAULT = flywheelSpeedIsDefaultSubscriber!!.get()
+        DemoConfiguration.WRIST_MAX_HEIGHT = wristMaxHeightSubscriber!!.get()
+        DemoConfiguration.ENABLE_WRIST = enableWristSubscriber!!.get()
+        DemoConfiguration.ENABLE_WRIST_TO_SLIDER = enableWristToSliderSubscriber!!.get()
+        DemoConfiguration.ENABLE_DRIVE = enableDriveSubscriber!!.get()
+        DemoConfiguration.TELEMETRY_VERBOSITY = telemetryVerbosityChooser!!.selected
 
         Drivetrain.setDefaultCommand()
         Flywheels.setDefaultCommand()

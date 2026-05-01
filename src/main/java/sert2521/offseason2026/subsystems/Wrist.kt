@@ -79,7 +79,7 @@ object Wrist : SubsystemBase() {
     }
 
     private fun setSetpoint(setpoint: Double) {
-        if (DemoConfiguration.enableWrist) {
+        if (DemoConfiguration.ENABLE_WRIST) {
             leftMotor.closedLoopController.setSetpoint(
                 setpoint,
                 SparkBase.ControlType.kMAXMotionPositionControl
@@ -95,7 +95,7 @@ object Wrist : SubsystemBase() {
     }
 
     private fun setVoltage(voltage: Double) {
-        if (DemoConfiguration.enableWrist) {
+        if (DemoConfiguration.ENABLE_WRIST) {
             leftMotor.setVoltage(voltage)
             rightMotor.setVoltage(voltage)
         } else {
@@ -143,7 +143,7 @@ object Wrist : SubsystemBase() {
             goToMovingPosition {
                 MathUtil.interpolate(
                     WristConstants.STOW_POSITION,
-                    DemoConfiguration.wristMaxHeight,
+                    DemoConfiguration.WRIST_MAX_HEIGHT,
                     Input.getGunnerSlider()
                 )
             }
@@ -151,7 +151,7 @@ object Wrist : SubsystemBase() {
     }
 
     fun setDefaultCommand() {
-        defaultCommand = if (DemoConfiguration.enableWristToSlider && DemoConfiguration.enableWrist) {
+        defaultCommand = if (DemoConfiguration.ENABLE_WRIST_TO_SLIDER && DemoConfiguration.ENABLE_WRIST) {
             wristToSlider()
         } else {
             Commands.idle(this)
