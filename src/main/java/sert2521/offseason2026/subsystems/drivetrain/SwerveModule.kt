@@ -108,7 +108,7 @@ class SwerveModule(private val index: Int) {
                         includes:String){
         doubleTelemetries.keys.forEach {
             for (type in includes) {
-                if (type in it) {
+                if (it[0] == type) {
                     val telemetryKey = it.drop(2)
                     doubles[telemetryKey] = doubleTelemetries[it]!!.invoke()
                 }
@@ -117,7 +117,7 @@ class SwerveModule(private val index: Int) {
 
         booleanTelemetries.keys.forEach {
             for (type in includes) {
-                if (type in it) {
+                if (it[0] == type) {
                     val telemetryKey = it.drop(2)
                     bools[telemetryKey] = booleanTelemetries[it]!!.invoke()
                 }

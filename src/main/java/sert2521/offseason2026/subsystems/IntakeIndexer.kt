@@ -135,7 +135,7 @@ object IntakeIndexer : SubsystemBase() {
                         includes:String){
         doubleTelemetries.keys.forEach {
             for (type in includes) {
-                if (type in it) {
+                if (it[0] == type) {
                     val telemetryKey = it.drop(2)
                     doubles[telemetryKey] = doubleTelemetries[it]!!.invoke()
                 }
@@ -144,7 +144,7 @@ object IntakeIndexer : SubsystemBase() {
 
         booleanTelemetries.keys.forEach {
             for (type in includes) {
-                if (type in it) {
+                if (it[0] == type) {
                     val telemetryKey = it.drop(2)
                     bools[telemetryKey] = booleanTelemetries[it]!!.invoke()
                 }

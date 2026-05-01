@@ -48,10 +48,7 @@ object Drivetrain : SubsystemBase() {
 
     private fun driveFieldOriented(chassisSpeeds: ChassisSpeeds) {
         driveRobotOriented(
-            ChassisSpeeds.fromFieldRelativeSpeeds(
-                chassisSpeeds,
-                currentRotation.minus(rotationOffset)
-            )
+            ChassisSpeeds.fromFieldRelativeSpeeds(chassisSpeeds, currentRotation.minus(rotationOffset))
         )
     }
 
